@@ -7,7 +7,7 @@
  * - 数据分支不存在时，从默认分支（main）建出来，内容就是 main 上那几个文件。
  *
  * 数据放在单独的分支上：手机上每次同步都是一个 commit，不混进 main 的历史，也不会触发部署、
- * 不会让电脑上 git push 被拒。部署时再把数据分支的文件拷进来（见 .github/workflows/deploy.yml）。
+ * 不会让电脑上 git push 被拒。公开站点的构建不读取私有同步仓库。
  */
 import { StaleError, type Remote, type RemoteFile, type RemoteSnapshot } from './sync'
 
@@ -20,7 +20,7 @@ export interface RepoConfig {
 
 export const DATA_REPO: RepoConfig = {
   owner: 'kikuchanjace',
-  name: 'ai-infra-inferview',
+  name: 'ai-infra-inferview-data',
   branch: 'data',
 }
 

@@ -2,7 +2,7 @@
 
 北美 AI Infra 面试知识库。Markdown 文档 + 交互式可视化插件，部署在 GitHub Pages。
 
-站点：<https://scatyf3.github.io/ai-infra-inferview/>
+站点 <https://kikuchanjace.github.io/ai-infra-inferview/>
 
 ## 本地开发
 
@@ -85,17 +85,16 @@ leetgpu: [50, 83]   # LeetGPU 题号，链接按 src/data/leetgpu-challenges.jso
 
 ## 批注、闪卡在设备间同步
 
-读者批注和闪卡的复习记录 / 批注 / 暂停存在 `src/data/` 下四个 json 里（清单见 `src/lib/syncDocs.ts`）。每次改动先存进浏览器，界面立刻更新、离线也不丢，再同步。数据一律以 GitHub 上的 `data` 分支为准：
+读者批注和闪卡记录先保存到浏览器，连接 GitHub 后再同步到私有仓库 `kikuchanjace/ai-infra-inferview-data` 的 `data` 分支。文件清单见 `src/lib/syncDocs.ts`。
 
 | 在哪打开 | 怎么同步 |
 |---|---|
 | 任何设备，导航栏 ☁ 里连了 token | 页面直接读写 `data` 分支 |
 | 本地 `docs:dev`，没连 token | dev server 用电脑上的 GitHub 登录代为读写 `data` 分支（依次找 `GH_TOKEN` / `GITHUB_TOKEN`、`gh auth token`、git 凭据管理器）；都没有才退回本机仓库里的 json |
-| 线上站点，没连 token | 从公开地址只读拉取 `data` 分支（CDN 可能晚几分钟），改动只存在这台设备上 |
+| 线上站点，没连 token | 使用本机记录 |
 
-本机仓库 main 上的这几个 json 只是初始数据，不会再更新；要看最新的用 `git show origin/data:src/data/flashcard-notes.json`。
+公开仓库 `main` 上的四个同步 JSON 使用空值作为初始数据。GitHub Pages 构建只使用这些初始文件。
 
-- **连 GitHub**：点导航栏的 ☁，按提示建一个 fine-grained token，只授权这个仓库、Contents 选 Read and write。token 只存在那台设备上。
+- **连 GitHub**：点导航栏的 ☁，按提示建一个 fine-grained token，只授权私有仓库 `ai-infra-inferview-data`，Contents 选 Read and write。每台设备分别连接。
 - **同步怎么做**：读远端 → 按条目合并（较新的胜出，删除留删除记录）→ 有变化就提交。停手 2 秒、切到后台、重新联网时同步一次，同一轮的几份数据合成一个 commit。提交时带上期望的分支 head，别的设备抢先提交了就重读重合并（`src/lib/sync.ts`、`src/lib/github.ts`）。
-- **为什么是单独的 data 分支**：手机上每次同步都是一个 commit，不混进 main 的历史，不触发部署，电脑上 `git push` 也不会因此被拒。部署时 workflow 会把 data 分支上最新的四个文件拷进来，当站点的初始数据。连上 GitHub 之后，本机仓库里的这几个 json 不再更新，以 data 分支为准。
 - **装到手机桌面**：站点是 PWA。iPhone 用 Safari 打开，分享 →「添加到主屏幕」；Android 用 Chrome 菜单里的「安装应用」。之后全屏打开，访问过的页面断网也能看（`docs/public/sw.js`）。手机上刷卡用单独的闪卡页 `/flashcards`，首页有入口。

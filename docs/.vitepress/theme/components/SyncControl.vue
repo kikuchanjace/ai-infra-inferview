@@ -154,8 +154,8 @@ onBeforeUnmount(() => {
           <!-- 没连 -->
           <template v-else>
             <p>
-              现在：<b>{{ syncState.mode === 'server' ? '写进本机仓库的文件，靠 git 同步' : '显示 data 分支上的数据，但改动只存在这台设备上' }}</b>。
-              连上 GitHub 后，改动会同步到 data 分支，手机和电脑在任何网络下共用同一份。
+                现在：<b>改动只存在这台设备上</b>。
+                连上 GitHub 后，改动会同步到私有数据仓库的 data 分支，手机和电脑共用同一份记录。
             </p>
             <ol class="sc-steps">
               <li>

@@ -53,7 +53,7 @@ export default defineConfig({
     returnToTopLabel: '回到顶部',
     sidebarMenuLabel: '目录',
     darkModeSwitchLabel: '主题',
-    socialLinks: [{ icon: 'github', link: 'https://github.com/scatyf3/ai-infra-inferview' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/kikuchanjace/ai-infra-inferview' }],
   },
   vite: {
     plugins: [dataStore()],
