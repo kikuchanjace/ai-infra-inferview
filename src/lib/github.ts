@@ -18,7 +18,11 @@ export interface RepoConfig {
   branch: string
 }
 
-export const DATA_REPO: RepoConfig = { owner: 'scatyf3', name: 'ai-infra-inferview', branch: 'data' }
+export const DATA_REPO: RepoConfig = {
+  owner: 'kikuchanjace',
+  name: 'ai-infra-inferview',
+  branch: 'data',
+}
 
 /** 私有笔记的仓库（「我的准备」页读它，见 privateNotes.ts）；同一个 token 要能读它 */
 export const PRIVATE_REPO: RepoConfig = { owner: 'scatyf3', name: 'inferview-private', branch: 'main' }
